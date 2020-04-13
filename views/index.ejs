@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel='stylesheet' href='css/style.css' />
+  </head>
+  <body>
+    <h1> Лист</h1>
+    <!-- <p>Welcome to <%= title %></p> -->
+    <div class="container">
+    
+      <form onsubmit="sub(event); return false">
+        <div class="form-group">
+          <label for="title">Название</label>
+          <input type="text" class="form-control title" name="title" placeholder="Название" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="description">Описание</label>
+          <textarea class="form-control" id="description" rows="2"></textarea>
+        </div>
+        <button class="btn btn-primary">Создать</button>
+      </form>
+      <br>
+      <div class="task-result"></div>
+    </div>
+    <script src="js/main.js"></script>
+  </body>
+</html>
+
+
