@@ -1,3 +1,4 @@
+require('dotenv').config()
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -8,9 +9,8 @@ var mongoose = require('mongoose');
 var indexRouter = require('./routes/routes');
 
 var app = express();
-
 // DB CONNECT
-mongoose.connect('mongodb+srv://erikdils:@project01-t5a47.mongodb.net/test?retryWrites=true&w=majority', {
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@project01-t5a47.mongodb.net/test?retryWrites=true&w=majority`, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
