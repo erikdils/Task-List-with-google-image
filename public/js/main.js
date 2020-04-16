@@ -1,3 +1,11 @@
+
+// log = console.log
+// document.querySelector('h3').innerHTML = myDate
+
+// const myDate = new Date()
+
+// log(myDate)
+
 const sub = async (e) => {
     e.preventDefault()
 
@@ -9,7 +17,8 @@ const sub = async (e) => {
         description
     }
 
-    const response = await fetch('task', {
+    
+const response = await fetch('task', {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         headers: {
             'Content-Type': 'application/json'
@@ -18,7 +27,6 @@ const sub = async (e) => {
         body: JSON.stringify(data) // body data type must match "Content-Type" header
     });
     const result = await response.json(); // parses JSON response into native JavaScript objects
-    console.log(result)
     start()
 }
 
@@ -34,15 +42,15 @@ async function start() {
             <div class="block">
             <div class="left">${el.description}</div>
             <div class="right">
-            <button onclick="done('${el._id}')" class="btn btn-success ${(el.done) ? 'hidden' : ''}">Сделано</button>
-            <button onclick="remove('${el._id}')" class="btn btn-danger">Удалить</button>
+            <button onclick="done('${el._id}')" class="btn btn-success ${(el.done) ? 'hidden' : ''}">&#x2714;</button>
+            <button onclick="remove('${el._id}')" class="btn btn-danger">&#x2715;</button>
             </div>
             </div>
             </div>
         </div>
          `
     });
-    console.log(data)
+    // console.log(data)
 
 }
 start();
@@ -57,7 +65,7 @@ async function done(_id) {
     });
     const result = await response.json()
     location.reload()
-    console.log(result)
+    // console.log(result)
 }
 
 async function remove(_id) {
@@ -66,5 +74,5 @@ async function remove(_id) {
     });
     const result = await response.json()
     location.reload()
-    console.log(_id)
+    // console.log(_id)
 }

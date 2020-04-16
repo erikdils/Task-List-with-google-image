@@ -6,11 +6,13 @@
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
+    "fetch": "^1.1.0",
     "http-errors": "~1.6.3",
     "mongoose": "^5.9.7",
     "morgan": "~1.9.1"

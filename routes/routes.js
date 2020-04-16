@@ -1,6 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose')
+const cheerio = require('cheerio')
+const fetchUrl = require("fetch").fetchUrl;
+
+// source file is iso-8859-15 but it is converted to utf-8 automatically
+fetchUrl("https://www.google.com.ua/search?q=broccoli", function(error, meta, body){
+    // console.log(body.toString());
+    const $ = cheerio.load(body.toString())
+    $('img').map((i, el) => {
+        console.log(i, el.attribs.src)
+    }) 
+});
+
 
 const Task = mongoose.model('Task', {
   title: String,
@@ -27,8 +39,9 @@ router.post('/task', function (req, res, next) {
   task.save().then(() => res.json({ok: true}));
 });
 
-router.get('/task', (req, res) => {
-  Task.find({}).then((data) => { res.json(data) })
+router.get('/task', async (req, res) => {
+  const data = await Task.find({})
+  res.json(data)
 });
 
 router.put('/task/:_id', (req, res) => {

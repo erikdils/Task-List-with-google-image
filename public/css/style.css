@@ -1,8 +1,9 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  
 }
-
+h1{text-align: center;}
 a {
   color: #00B7FF;
 }
@@ -17,9 +18,31 @@ a {
 }
 
 .done {
-  background-color: rgb(171, 228, 146) !important;
+  background-color: rgb(217, 255, 200) !important;
 }
 
 .card {
-  background-color: rgb(241, 245, 155);
+  background-color: rgb(249, 250, 219);
+  margin: 15px 0;
+}
+
+.container-list {
+  width: 100%;
+  height: auto;
+  /* min-height: 500px;
+  max-width: 600px;
+  min-width: 250px; */
+  background: #f1f5f8;
+  /* background-image: radial-gradient(#bfc0c1 7.2%, transparent 0); */
+  background-size: 25px 25px;
+  border-radius: 20px;
+  box-shadow: 4px 3px 7px 2px #00000040;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.qty {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
 }

@@ -10,7 +10,7 @@ var indexRouter = require('./routes/routes');
 
 var app = express();
 // DB CONNECT
-mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@project01-t5a47.mongodb.net/test?retryWrites=true&w=majority`, {
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}${process.env.DB_HOST}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
