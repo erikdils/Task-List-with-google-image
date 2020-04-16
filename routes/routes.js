@@ -4,14 +4,6 @@ const mongoose = require('mongoose')
 const cheerio = require('cheerio')
 const fetchUrl = require("fetch").fetchUrl;
 
-// source file is iso-8859-15 but it is converted to utf-8 automatically
-fetchUrl("https://www.google.com.ua/search?q=broccoli", function(error, meta, body){
-    // console.log(body.toString());
-    const $ = cheerio.load(body.toString())
-    $('img').map((i, el) => {
-        console.log(i, el.attribs.src)
-    }) 
-});
 
 
 const Task = mongoose.model('Task', {
@@ -41,7 +33,22 @@ router.post('/task', function (req, res, next) {
 
 router.get('/task', async (req, res) => {
   const data = await Task.find({})
-  res.json(data)
+  const taskAmount = data.length
+  let readyTask = 0
+  data.forEach((task, i) => {
+    fetchUrl(`https://www.google.com.ua/search?q=${task.title}`, function(error, meta, body){
+      // console.log(body.toString());
+      const $ = cheerio.load(body.toString())
+      data[i].imgs = []
+      $('img').map((ii, el) => {
+        data[i].imgs.push(el.attribs.src)
+      }) 
+      readyTask++
+      console.log(taskAmount, readyTask, data[i])
+
+      if (taskAmount == readyTask) { res.json(data) }
+    });
+  })
 });
 
 router.put('/task/:_id', (req, res) => {

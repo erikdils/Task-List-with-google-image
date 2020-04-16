@@ -42,6 +42,7 @@ async function start() {
             <div class="block">
             <div class="left">${el.description}</div>
             <div class="right">
+            
             <button onclick="done('${el._id}')" class="btn btn-success ${(el.done) ? 'hidden' : ''}">&#x2714;</button>
             <button onclick="remove('${el._id}')" class="btn btn-danger">&#x2715;</button>
             </div>
