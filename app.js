@@ -10,15 +10,24 @@ var indexRouter = require('./routes/routes');
 
 var app = express();
 // DB CONNECT
-mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}${process.env.DB_HOST}`, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => {
-  console.log('Db Connected')
-}).catch((err) => {
-  console.log('Error Connect', err)
-})
+// mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}${process.env.DB_HOST}`, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true
+// }).then(() => {
+//   console.log('Db Connected')
+// }).catch((err) => {
+//   console.log('Error Connect', err)
+// })
 
+require('mongoose').connect('mongodb://localhost/task', {
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+})
+  .then(() => console.log('DB Connected!'))
+  .catch(err => {
+    console.log(`DB Connection Error: ${err.message}`);
+  });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

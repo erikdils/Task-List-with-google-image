@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose')
 const cheerio = require('cheerio')
 const fetchUrl = require("fetch").fetchUrl;
-
+const puppeteer = require('puppeteer');
 
 
 const Task = mongoose.model('Task', {
@@ -35,20 +35,46 @@ router.get('/task', async (req, res) => {
   const data = await Task.find({})
   const taskAmount = data.length
   let readyTask = 0
+  let new1 = []
+    
   data.forEach((task, i) => {
-    fetchUrl(`https://www.google.com.ua/search?q=${task.title}`, function(error, meta, body){
-      // console.log(body.toString());
-      const $ = cheerio.load(body.toString())
-      data[i].imgs = []
+
+    (async () => {
+      const browser = await puppeteer.launch()
+      const page = await browser.newPage()
+      await page.goto(`https://www.google.com.ua/search?q=${task.title}`)
+      // await page.screenshot({ path: 'melone.png' })
+      const html = await page.content();
+      const $ = cheerio.load(html)
+      const imgs = []
       $('img').map((ii, el) => {
-        data[i].imgs.push(el.attribs.src)
+        imgs.push(el.attribs.src)
+        console.log(el.attribs.src)
       }) 
       readyTask++
-      console.log(taskAmount, readyTask, data[i])
-
-      if (taskAmount == readyTask) { res.json(data) }
-    });
+      new1.push([task, imgs])
+      if (taskAmount == readyTask) { res.json(new1) }
+      await browser.close()
+    })()
+    
+    // fetchUrl(`https://www.google.com.ua/search?q=${task.title}`, function(error, meta, body){
+    //   const $ = cheerio.load(body.toString())
+    //   const imgs = []
+    //   $('img').map((ii, el) => {
+    //     imgs.push(el.attribs.src)
+    //     console.log(el.attribs.src)
+    //   }) 
+      
+    //   readyTask++
+    //   // console.log(taskAmount, readyTask, data[i])
+    //   task.test = true
+    //   new1.push([task, imgs])
+    //   if (taskAmount == readyTask) { res.json(new1) }
+    // });
+  
   })
+
+  console.log(new1,'Test')
 });
 
 router.put('/task/:_id', (req, res) => {

@@ -36,15 +36,15 @@ async function start() {
     document.querySelector('.task-result').innerHTML = '';
     data.forEach(el => {
         document.querySelector('.task-result').innerHTML += `
-        <div class="card ${(el.done) ? 'done' : ''}">
+        <div class="card ${(el[0].done) ? 'done' : ''}">
             <div class="card-body">
-            <h3>${el.title}</h3>
+            <h3>${el[0].title}</h3>
             <div class="block">
-            <div class="left">${el.description}</div>
+            <div class="left">${el[0].description}</div>
             <div class="right">
-            
-            <button onclick="done('${el._id}')" class="btn btn-success ${(el.done) ? 'hidden' : ''}">&#x2714;</button>
-            <button onclick="remove('${el._id}')" class="btn btn-danger">&#x2715;</button>
+            <img src="${el[1][1]}" alt="">
+            <button onclick="done('${el[0]._id}')" class="btn btn-success ${(el[0].done) ? 'hidden' : ''}">&#x2714;</button>
+            <button onclick="remove('${el[0]._id}')" class="btn btn-danger">&#x2715;</button>
             </div>
             </div>
             </div>
