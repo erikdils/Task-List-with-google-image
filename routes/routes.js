@@ -4,13 +4,7 @@ const mongoose = require('mongoose')
 const cheerio = require('cheerio')
 const fetchUrl = require("fetch").fetchUrl;
 const puppeteer = require('puppeteer');
-
-
-const Task = mongoose.model('Task', {
-  title: String,
-  description: String,
-  done: Boolean 
-});
+const Task = require('../models/task');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
