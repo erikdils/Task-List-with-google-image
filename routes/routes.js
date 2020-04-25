@@ -30,6 +30,7 @@ router.get('/task', async (req, res) => {
   const taskAmount = data.length
   let readyTask = 0
   let new1 = []
+  if(data.length == 0) res.json([])
     
   data.forEach((task, i) => {
 

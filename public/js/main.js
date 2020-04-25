@@ -83,8 +83,10 @@ function edit(i) {
 }
 
 async function start() {
+
     const response = await fetch('task');
     const tasks = await response.json();
+
     let date = new Date();
     document.querySelector('.task-result').innerHTML = '';
     document.querySelector('.data > h3').innerHTML = `${date.getDate()} ${getMonthName(date)}`;
@@ -147,7 +149,6 @@ async function remove(_id) {
 async function price(_id, i) {
     const price = document.querySelectorAll('.input-price')[i].value;
     const cent = document.querySelectorAll('.input-price_cent')[i].value;
-    log(price, cent)
     const response = await fetch(`task/${_id}`, {
         method: 'PUT', // *GET, POST, PUT, DELETE, etc.
         headers: {
