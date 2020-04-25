@@ -6,7 +6,7 @@
     <link rel='stylesheet' href='css/style.css' />
   </head>
   <body>
-    <h1>Жрать Лист</h1>
+    <h1>Eat sheet</h1>
     <!-- <p>Welcome to <%= title %></p> -->
     <div class="container">
     <div class="container-list">
@@ -15,24 +15,26 @@
           <div class="data"><h3></h3></div>
           <hr>
           <div class="qty">
-            <div class="total"><span></span> <p>всего</p></div>
-            <div class="remaining"><span></span> <p>осталось</p></div>
-            <div class="dones"><span></span> <p>выполнено</p></div>
+            <div class="total"><span></span> <p>total</p></div>
+            <div class="remaining"><span></span> <p>remains</p></div>
+            <div class="dones"><span></span> <p>done</p></div>
           </div>
           <hr>
           <label for="title"></label>
-          <input type="text" class="form-control title" name="title" placeholder="Название" required>
+          <input type="text" class="form-control title" name="title" placeholder="Title" required>
         </div>
 
         <div class="form-group">
           <label for="description"></label>
-          <textarea class="form-control" id="description" rows="2" placeholder="Описание"></textarea>
+          <textarea class="form-control" id="description" rows="2" placeholder="Description"></textarea>
         </div>
-        <button class="btn btn-primary">Создать</button>
+        <button class="btn btn-primary">Add</button>
       </form>
       
       <br>
       <div class="task-result"></div>
+      <h4>totlal price:123</h4>
+
     </div>
   </div>
     <script src="js/main.js"></script>

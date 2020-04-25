@@ -73,8 +73,10 @@ router.get('/task', async (req, res) => {
 
 router.put('/task/:_id', (req, res) => {
   const _id = req.params._id
-  console.log(_id)
-  Task.findOneAndUpdate({ _id }, { done: req.body.done })
+  const update = {} 
+  if (req.body.done) update.done = req.body.done
+  if (req.body.price) update.price = req.body.price
+  Task.findOneAndUpdate({ _id }, update)
     .then(() => { res.json({ ok: true }) })
     .catch(() => { res.json({ ok: false }) })
 })
@@ -85,5 +87,6 @@ router.delete('/task/:_id', (req, res) => {
   .then(() => { res.json({ ok: true }) })
   .catch(() => { res.json({ ok: false }) })
 })
+
 
 module.exports = router;

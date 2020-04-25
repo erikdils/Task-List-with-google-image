@@ -9,10 +9,13 @@ a {
 }
 
 .block {
-  display: flex;
-  justify-content: space-between;
+  /* display: flex;
+  justify-content: space-between; */
 }
-
+.img {
+  width: 45%;
+  padding: 12px 0;
+}
 .hidden, .hide {
   display: none !important;
 }

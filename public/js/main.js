@@ -35,18 +35,18 @@ const sub = async (e) => {
 function getMonthName(date) {
     let monthName = '';
     const month = date.getMonth()
-    if (month == 1) monthName = 'Января';
-    if (month == 2) monthName = 'Февраля';
-    if (month == 3) monthName = 'Марта';
-    if (month == 4) monthName = 'Апреля';
-    if (month == 5) monthName = 'Мая';
-    if (month == 6) monthName = 'Июня';
-    if (month == 7) monthName = 'Июля';
-    if (month == 8) monthName = 'Августа';
-    if (month == 9) monthName = 'Сентября';
-    if (month == 10) monthName = 'Октября';
-    if (month == 11) monthName = 'Ноября';
-    if (month == 12) monthName = 'Декабря';
+    if (month == 1) monthName = 'January';
+    if (month == 2) monthName = 'February';
+    if (month == 3) monthName = 'March';
+    if (month == 4) monthName = 'April';
+    if (month == 5) monthName = 'May';
+    if (month == 6) monthName = 'June';
+    if (month == 7) monthName = 'July';
+    if (month == 8) monthName = 'August';
+    if (month == 9) monthName = 'September';
+    if (month == 10) monthName = 'October';
+    if (month == 11) monthName = 'November';
+    if (month == 12) monthName = 'December';
 
     return monthName
 }
@@ -77,7 +77,8 @@ function edit(i) {
     inputPrice.classList.remove('hide');
     const addPriceButton = card.querySelector('.price-btn');
     addPriceButton.classList.add('hide');
-
+    const saveBtn = document.querySelector('.save-btn');
+    saveBtn.classList.remove('hide');
     log(card)
 }
 
@@ -103,11 +104,12 @@ async function start() {
             ${(el[0].price) ? el[0].price : '<button onclick="edit('+ i +')" class="price-btn">Add Price</button>' }  
             <input type="number" class="input-price ${(el[0].edit) ? '' : 'hide' }">
             <input type="number" class="input-price_cent ${(el[0].edit) ? '' : 'hide' }">
-            <button onclick="">Save</button>
+            <button onclick="price('${el[0]._id}','${i}')" class="save-btn hide">Save</button>
             </div>
 
+
             <div class="right">
-            <img src="${el[1][1]}" alt="">
+            <img src="${el[1][1]}" class="img" alt="">
             <button onclick="done('${el[0]._id}')" class="btn btn-success ${(el[0].done) ? 'hidden' : ''}">&#x2714;</button>
             <button onclick="remove('${el[0]._id}')" class="btn btn-danger">&#x2715;</button>
             </div>
@@ -116,7 +118,7 @@ async function start() {
         </div>
          `
     });
-    // console.log(data)
+
 }
 start();
 
@@ -132,7 +134,6 @@ async function done(_id) {
     });
     const result = await response.json()
     start();
-    // console.log(result)
 }
 
 async function remove(_id) {
@@ -141,6 +142,21 @@ async function remove(_id) {
     });
     const result = await response.json()
     start();
-    // location.reload()
-    // console.log(_id)
+}
+
+async function price(_id, i) {
+    const price = document.querySelectorAll('.input-price')[i].value;
+    const cent = document.querySelectorAll('.input-price_cent')[i].value;
+    log(price, cent)
+    const response = await fetch(`task/${_id}`, {
+        method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            price: price + '.' + cent
+        })
+    });
+    const result = await response.json()
+    start();
 }
