@@ -95,6 +95,8 @@ async function start() {
 
     console.log(amounthInprogres(tasks))
     document.querySelector('.dones > span').innerHTML = amounthDone(tasks); 
+
+    // draw cards
     tasks.forEach((el, i) => {
         document.querySelector('.task-result').innerHTML += `
         <div class="card ${(el[0].done) ? 'done' : ''}">
@@ -104,11 +106,10 @@ async function start() {
             <div class="left">
             ${el[0].description}
             ${(el[0].price) ? el[0].price : '<button onclick="edit('+ i +')" class="price-btn">Add Price</button>' }  
-            <input type="number" class="input-price ${(el[0].edit) ? '' : 'hide' }">
-            <input type="number" class="input-price_cent ${(el[0].edit) ? '' : 'hide' }">
+            <input type="number" class="input-price ${(el[0].edit) ? '' : 'hide' }" min="0">
+            <input type="number" class="input-price_cent ${(el[0].edit) ? '' : 'hide' }" min="0" max="100">
             <button onclick="price('${el[0]._id}','${i}')" class="save-btn hide">Save</button>
             </div>
-
 
             <div class="right">
             <img src="${el[1][1]}" class="img" alt="">
@@ -121,6 +122,13 @@ async function start() {
          `
     });
 
+    // draw total price
+    let total = 0
+    tasks.forEach((el) => {
+        if(el[0].price) total += el[0].price
+    })
+    const showTotal = document.querySelector('.total-price');
+    showTotal.innerHTML = total
 }
 start();
 
