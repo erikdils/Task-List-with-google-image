@@ -5,6 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
+var cors = require('cors')
 
 var indexRouter = require('./routes/routes');
 
@@ -29,9 +30,23 @@ require('mongoose').connect('mongodb://localhost/task', {
     console.log(`DB Connection Error: ${err.message}`);
   });
 
+var corsOptions = {
+  origin: 'http://localhost:4200',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+app.use(cors(corsOptions));
+// app.use(function (req, res, next) { //allow cross origin requests
+//     res.setHeader("Access-Control-Allow-Methods", "POST, PUT, OPTIONS, DELETE, GET");
+//     res.header("Access-Control-Allow-Origin", "http://localhost:4200"); // http://127.0.0.1, 192.168.0.100
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     res.header("Access-Control-Allow-Credentials", true);
+//     next()
+//   })
 
 app.use((req, res, next) => { 
   console.log('url: ', req.url)

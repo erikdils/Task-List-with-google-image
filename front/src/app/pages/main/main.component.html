@@ -1,0 +1,26 @@
+<app-header></app-header>
+
+<p>main works!</p>
+
+<!-- Card -->
+<div *ngFor="let card of taskList; let i = index" class="card border-primary mb-3" style="max-width: 20rem;">
+  <div class="card-header">
+    <span class="price"> €
+       <span *ngIf = "!card[0].edit">{{card[0].price}}</span>
+        <input *ngIf = "card[0].edit" class="form-control form-control-sm" type="text" placeholder=".form-control-sm" id="inputSmall">
+    </span>
+     <button *ngIf = "card[0].price && !card[0].edit" (click) = "editPrice(i)" type="button" class="btn btn-primary btn-sm">Add Price</button>
+    <button *ngIf = "!card[0].price && !card[0].edit" (click) = "editPrice(i)" type="button" class="btn btn-primary btn-sm">Edit</button>
+    </div>
+  <div class="card-body">
+    <h4 class="card-title">{{card[0].title}}</h4>
+    <p class="card-text">{{card[0].description}}</p>
+    <div class="imgs">
+      <img src="{{card[1][1]}}" alt="">
+      <img src="{{card[1][2]}}" alt="">
+      <img src="{{card[1][3]}}" alt="">
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
