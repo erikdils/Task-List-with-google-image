@@ -1,13 +1,20 @@
 <app-header></app-header>
 
-<p>main works!</p>
+<div class="block">
+  <div class="title-item">
+      <input [(ngModel)]="titleInput" type="text" class="form-control" placeholder="Title" id="inputDefault">
+      <textarea  [(ngModel)]="descriptionInput" class="form-control" id="exampleTextarea" rows="3" placeholder="Description"></textarea>
+      <button (click)= "add()" type="button" class="btn btn-success">Add</button>
+</div>
+
 
 <!-- Card -->
-<div *ngFor="let card of taskList; let i = index" class="card border-primary mb-3" style="max-width: 20rem;">
+<div *ngFor="let card of taskList; let i = index" class="card border-primary mb-3" style="max-width: 30rem;">
   <div class="card-header">
     <span class="price"> €
        <span *ngIf = "!card[0].edit">{{card[0].price}}</span>
         <input *ngIf = "card[0].edit" class="form-control form-control-sm" type="text" placeholder=".form-control-sm" id="inputSmall">
+          <button *ngIf = "card[0].edit" type="button" class="btn btn-success btn-sm">Save</button>
     </span>
      <button *ngIf = "card[0].price && !card[0].edit" (click) = "editPrice(i)" type="button" class="btn btn-primary btn-sm">Add Price</button>
     <button *ngIf = "!card[0].price && !card[0].edit" (click) = "editPrice(i)" type="button" class="btn btn-primary btn-sm">Edit</button>
@@ -23,4 +30,14 @@
   </div>
 </div>
 
+<div class="block-item">
+  <div class="row">
+    <div class="col-md-4">Total:  {{taskList.length}}</div>
+      <div class="col-md-4">Remains: {{ amounthInprogres() }}</div>
+    <div class="col-md-4">Done: {{amounthDone()}}</div>
+  </div>
+</div>
+
+<h2>Total: {{total()}}</h2>
+</div>
 <app-footer></app-footer>
