@@ -34,7 +34,7 @@ router.put('/task-price', async function (req, res, next) {
 router.put('/task-done', async function (req, res, next) {
   await Task.findOneAndUpdate({ _id: req.body._id }, { done: true });
   res.json({ ok: true })
-})
+});
 
 router.get('/task', async (req, res) => {
   const data = await Task.find({})

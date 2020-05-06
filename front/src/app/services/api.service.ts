@@ -29,7 +29,7 @@ export class ApiService {
   };
 
   done(_id) {
-    return this.http.put('http:locahost:3007/task-done', { _id }, httpOptions).toPromise();
+    return this.http.put('http://localhost:3007/task-done', { _id }, httpOptions).toPromise();
   };
 
 }
