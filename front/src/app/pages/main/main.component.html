@@ -18,6 +18,8 @@
     </span>
      <button *ngIf = "card[0].price && !card[0].edit" (click) = "editPrice(i)" type="button" class="btn btn-primary btn-sm">Add Price</button>
     <button *ngIf = "!card[0].price && !card[0].edit" (click) = "editPrice(i)" type="button" class="btn btn-primary btn-sm">Edit</button>
+    <button *ngIf = "!card[0].done" (click) = "done(i, card[0]._id)" type="button" class="btn btn-success btn-sm">Done</button>
+
     </div>
   <div class="card-body">
     <h4 class="card-title">{{card[0].title}}</h4>

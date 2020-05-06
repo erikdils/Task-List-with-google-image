@@ -25,7 +25,11 @@ export class ApiService {
   };
 
   newPrice(_id, price) {
-    return this.http.put('http://localhost:3007/task', {_id, price}, httpOptions).toPromise();
+    return this.http.put('http://localhost:3007/task-price', {_id, price}, httpOptions).toPromise();
+  };
+
+  done(_id) {
+    return this.http.put('http:locahost:3007/task-done', { _id }, httpOptions).toPromise();
   };
 
 }

@@ -42,6 +42,11 @@ export class MainComponent implements OnInit {
     this.refreshTaskList();
   }
 
+  async done(i, _id) {
+    const fromServer = await this.api.done(_id);
+    this.refreshTaskList();
+  }
+
 amounthInprogres() {
   return this.taskList.filter((t) => (!t[0].done) ? true : false).length
   };
