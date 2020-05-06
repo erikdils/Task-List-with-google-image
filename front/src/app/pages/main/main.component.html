@@ -13,8 +13,8 @@
   <div class="card-header">
     <span class="price"> €
        <span *ngIf = "!card[0].edit">{{card[0].price}}</span>
-        <input *ngIf = "card[0].edit" class="form-control form-control-sm" type="text" placeholder=".form-control-sm" id="inputSmall">
-          <button *ngIf = "card[0].edit" type="button" class="btn btn-success btn-sm">Save</button>
+        <input *ngIf = "card[0].edit" [(ngModel)]="card[0].newPrice" class="form-control form-control-sm" type="text" placeholder="" id="inputSmall">
+          <button *ngIf = "card[0].edit" (click) = "savePrice(i, card[0])" type="button" class="btn btn-success btn-sm">Save</button>
     </span>
      <button *ngIf = "card[0].price && !card[0].edit" (click) = "editPrice(i)" type="button" class="btn btn-primary btn-sm">Add Price</button>
     <button *ngIf = "!card[0].price && !card[0].edit" (click) = "editPrice(i)" type="button" class="btn btn-primary btn-sm">Edit</button>

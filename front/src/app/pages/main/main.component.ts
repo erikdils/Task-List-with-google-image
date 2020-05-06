@@ -1,10 +1,5 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 import { Component, OnInit } from '@angular/core';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-main',
@@ -17,18 +12,15 @@ export class MainComponent implements OnInit {
   taskList: any = [];      // Array<any>;
   titleInput: string;
   descriptionInput: string;
-  constructor(private http: HttpClient) { }
+
+  constructor(private api: ApiService) { }
 
   async ngOnInit() {
     this.refreshTaskList()
   }
 
   async refreshTaskList() {
-    this.taskList = await this.getTasks()
-  }
-
-  getTasks() {
-    return this.http.get('http://localhost:3007/task').toPromise()
+    this.taskList = await this.api.getTasks()
   }
 
   editPrice(i) {
@@ -44,6 +36,12 @@ export class MainComponent implements OnInit {
     return total
   }
 
+  async savePrice(i, card) {
+
+    const fromServer = await this.api.newPrice(card._id, card.newPrice);
+    this.refreshTaskList();
+  }
+
 amounthInprogres() {
   return this.taskList.filter((t) => (!t[0].done) ? true : false).length
   };
@@ -57,14 +55,9 @@ amounthInprogres() {
       title: this.titleInput,
       description: this.descriptionInput
     }
-    await this.sendTask(task);
+    await this.api.sendTask(task);
     this.refreshTaskList();
   }
-
-  sendTask(task) {
-    return this.http.post('http://localhost:3007/task', task).toPromise();
-  }
-
 
 
 }

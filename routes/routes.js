@@ -25,6 +25,14 @@ router.post('/task', function (req, res, next) {
   task.save().then(() => res.json({ok: true}));
 });
 
+router.put('/task',async function (req, res, next) {
+  console.log(req.body)
+  await Task.findOneAndUpdate({ _id: req.body._id }, { price: req.body.price });
+  res.json({
+    ok: true
+  })
+})
+
 router.get('/task', async (req, res) => {
   const data = await Task.find({})
   const taskAmount = data.length
