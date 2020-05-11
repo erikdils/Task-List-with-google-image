@@ -32,4 +32,8 @@ export class ApiService {
     return this.http.put('http://localhost:3007/task-done', { _id }, httpOptions).toPromise();
   };
 
+  delete(_id) {
+    return this.http.delete('http://localhost:3007/task/' + _id).toPromise();
+  };
+
 }

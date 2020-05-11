@@ -7,7 +7,7 @@
       <button (click)= "add()" type="button" class="btn btn-success">Add</button>
 </div>
 
-
+{{currentDate()}}
 <!-- Card -->
 <div *ngFor="let card of taskList; let i = index" class="card border-primary mb-3" style="max-width: 30rem;">
   <div class="card-header">
@@ -20,6 +20,7 @@
     <button *ngIf = "!card[0].price && !card[0].edit" (click) = "editPrice(i)" type="button" class="btn btn-primary btn-sm">Edit</button>
     <button *ngIf = "!card[0].done" (click) = "done(i, card[0]._id)" type="button" class="btn btn-success btn-sm">Done</button>
     <span *ngIf = "card[0].done">V</span>
+    <button (click) = "delete(card[0]._id)" type="button" class="btn btn-success btn-sm">Delete</button>
     </div>
   <div class="card-body">
     <h4 class="card-title">{{card[0].title}}</h4>

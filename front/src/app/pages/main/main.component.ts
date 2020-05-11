@@ -47,12 +47,12 @@ export class MainComponent implements OnInit {
     this.refreshTaskList();
   }
 
-amounthInprogres() {
-  return this.taskList.filter((t) => (!t[0].done) ? true : false).length
+  amounthInprogres() {
+    return this.taskList.filter((t) => (!t[0].done) ? true : false).length
   };
 
- amounthDone() {
-  return this.taskList.filter((t) => (!t[0].done) ? false : true).length
+  amounthDone() {
+    return this.taskList.filter((t) => (!t[0].done) ? false : true).length
   };
 
   async add() {
@@ -62,8 +62,36 @@ amounthInprogres() {
     }
     await this.api.sendTask(task);
     this.refreshTaskList();
-  }
+  };
 
+  async delete(_id) {
+    await this.api.delete(_id);
+    this.refreshTaskList();
+  };
+
+  currentDate() {
+    const date = new Date();
+    return date.getDate() + ' ' + this.getMonthName(date);
+  };
+
+  getMonthName(date) {
+    let monthName = '';
+    const month = date.getMonth()
+    if (month == 1) monthName = 'January';
+    if (month == 2) monthName = 'February';
+    if (month == 3) monthName = 'March';
+    if (month == 4) monthName = 'April';
+    if (month == 5) monthName = 'May';
+    if (month == 6) monthName = 'June';
+    if (month == 7) monthName = 'July';
+    if (month == 8) monthName = 'August';
+    if (month == 9) monthName = 'September';
+    if (month == 10) monthName = 'October';
+    if (month == 11) monthName = 'November';
+    if (month == 12) monthName = 'December';
+
+    return monthName
+  };
 
 }
 
